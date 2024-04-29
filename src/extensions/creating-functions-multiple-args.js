@@ -54,7 +54,18 @@ function addTime(time, minutes) {
   const newMinute = (parseInt(minute) + minutes) % 60
   const newHour =
     (parseInt(hour) + Math.floor((parseInt(minute) + minutes) / 60)) % 24
-  return `${newHour}:${newMinute.toString().padStart(2, '0')}`
+
+  const formattedMinute = newMinute < 10 ? '0' + newMinute : newMinute
+  let formattedHour
+  if (newHour === 0) {
+    formattedHour = '00'
+  } else if (newHour < 10) {
+    formattedHour = newHour.toString()
+  } else {
+    formattedHour = newHour
+  }
+
+  return `${formattedHour}:${formattedMinute}`
 }
 
 console.log(addTime('7:50', 4))
